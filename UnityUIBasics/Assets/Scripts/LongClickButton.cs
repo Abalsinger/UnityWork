@@ -11,32 +11,33 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     private float pointerDownTimer;
 
     public float requiredHoldTime;
+
+    public UnityEvent onLongClick;
+
     [SerializeField]
     private Image fillImage;
-
-    public UnityEvent OnLongClick;
 
     public void OnPointerDown(PointerEventData eventData)
     {
         pointerDown = true;
-        Debug.Log("OnPointerDown Error");
+        Debug.Log("OnPointerDown");
     }
-
+    
     public void OnPointerUp(PointerEventData eventData)
     {
         Reset();
-        Debug.Log("OnPointerUp Error");
+        Debug.Log("OnPointerUp");
     }
 
-    public void Update()
+    private void Update()
     {
-        if(pointerDown)
+       if (pointerDown)
         {
             pointerDownTimer += Time.deltaTime;
-            if (pointerDownTimer > requiredHoldTime)
+            if(pointerDownTimer > requiredHoldTime)
             {
-                if (OnLongClick != null)
-                    OnLongClick.Invoke();
+                if (onLongClick != null)
+                    onLongClick.Invoke();
 
                 Reset();
             }
