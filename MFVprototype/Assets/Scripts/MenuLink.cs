@@ -5,9 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MenuLink : MonoBehaviour
 {
-    public void SceneSwitch()
+    private int currentSceneIndex;
+
+
+    public void LoadMainMenu()
     {
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        PlayerPrefs.SetInt("SavedScene", currentSceneIndex);
         SceneManager.LoadScene(0);
+        
     }
 }
 
